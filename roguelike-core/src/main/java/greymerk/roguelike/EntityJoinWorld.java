@@ -39,9 +39,11 @@ public class EntityJoinWorld {
     for (Object buff : effects) {
       if (Potion.getIdFromPotion(((PotionEffect) buff).getPotion()) == 4) {
         int level = ((PotionEffect) buff).getAmplifier();
+        if (level >= 0 && level < 5) {
+          IEntity metaEntity = new MetaEntity(mob);
+          MonsterProfile.equip(world, world.rand, level, metaEntity);
+        }
 
-        IEntity metaEntity = new MetaEntity(mob);
-        MonsterProfile.equip(world, world.rand, level, metaEntity);
         if (entity.isDead) {
           event.setCanceled(true);
         }
